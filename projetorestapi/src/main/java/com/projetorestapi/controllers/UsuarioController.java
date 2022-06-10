@@ -27,7 +27,9 @@ public class UsuarioController {
 	@GetMapping(value = "/", produces = "application/json")
 	public ResponseEntity<List<Usuario>> BuscarTodos() {
 		
-		return new ResponseEntity<List<Usuario>>(usuarioRepository.findAll(), HttpStatus.OK);
+		List<Usuario> usuarios = usuarioRepository.findAll();
+		
+		return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/{nome}", produces = "application/json")
