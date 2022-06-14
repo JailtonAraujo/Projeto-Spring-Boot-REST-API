@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.projetorestapi.model.Telefone;
 import com.projetorestapi.model.Usuario;
 import com.projetorestapi.repository.UsuarioRepository;
 
@@ -38,9 +40,14 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(usuarioRepository.findByName(nome), HttpStatus.OK);
 	}
 	
-	
+	//@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping(value="/", produces = "application/json")
 	public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario){
+		
+		for(int pos = 0; pos < usuario.getTelefones().size(); pos++) {
+			usuario.getTelefones().get(pos).setUsuario(usuario);
+		}
+		
 		usuarioRepository.save(usuario);
 		return new ResponseEntity<Usuario>(HttpStatus.OK);
 	}
@@ -52,8 +59,15 @@ public class UsuarioController {
 		return  "OK";
 	}
 	
-	@PutMapping(value = "/{id}", produces = "application/json")
-	public ResponseEntity<Usuario> atualizar(@PathVariable(name = "id") Long id){
-		return new ResponseEntity<Usuario>(usuarioRepository.findById(id).get(), HttpStatus.OK);
+	@PutMapping(value = "/", produces = "application/json")
+	public ResponseEntity<String> atualizar(@RequestBody Usuario usuario){
+		
+		for(int pos = 0; pos< usuario.getTelefones().size() ;pos++) {
+			usuario.getTelefones().get(pos).setUsuario(usuario);
+		}
+		
+		usuarioRepository.save(usuario);
+		
+		return new ResponseEntity<String>( "Altualizado com sucesso!", HttpStatus.OK);
 	}
 }
