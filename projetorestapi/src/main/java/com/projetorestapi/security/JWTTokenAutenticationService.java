@@ -44,20 +44,24 @@ public class JWTTokenAutenticationService {
 
 		/* ADICIONANDO NO CABEÇALHO HTTP */
 		response.addHeader(HEADER_STRING, token);
+		
+		//Atualizando token
+		AplicationContextLoad.getApplicationContext().getBean(UsuarioRepository.class).updateTokenByUsername(JWT, userName);;
 
 		/* ADICIONANDO TNM NO BODY DO RESPONSE */
 		response.getWriter().write("{\"Authorization\": \"" + token + "\" }");
 	}
 
 	/* RETORNA USUARIO VALIDADO COM TOKEN OU EM CASO DE NÃO RETORNA NULL */
-	public Authentication getAuthentication(HttpServletRequest request) {
+	public Authentication getAuthentication(HttpServletRequest request, HttpServletResponse response) {
 
 		/* PEGA O TOKEN ENVIANDO NO CABEÇALHO */
 		String token = request.getHeader(HEADER_STRING);
 
 		if (token != null) {
+			String tokonClear = token.replace(TOKEN_PREFIX, "").trim();
 
-			String user = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token.replace(TOKEN_PREFIX, "")).getBody()
+			String user = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(tokonClear).getBody()
 					.getSubject();
 
 			if (user != null) {
@@ -66,12 +70,18 @@ public class JWTTokenAutenticationService {
 						.findByLogin(user);
 
 				if (usuario != null) {
-					return new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha(), usuario.getAuthorities());
+					
+					if(tokonClear.equalsIgnoreCase(usuario.getToken())) {
+						return new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha(), usuario.getAuthorities());
+					}
+					
+					
 				}
 
 			}
 
 		}
+		
 		return null; //Não Autoruzado
 	}
 

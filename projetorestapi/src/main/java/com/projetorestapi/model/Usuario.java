@@ -40,6 +40,8 @@ public class Usuario implements UserDetails{
 	@JsonIgnore
 	private String senha;
 	
+	private String token = "";
+	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Telefone> telefones = new ArrayList<Telefone>();
 	

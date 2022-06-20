@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +30,8 @@ public class UsuarioController {
 	UsuarioRepository usuarioRepository;
 
 	@GetMapping(value = "/", produces = "application/json")
+	@CacheEvict(value="cacheusuarios", allEntries = true)//Verifica se algum cache não esta sendo usado e remove
+	@CachePut("cacheusuarios")//Atualiza o cache com novos dados
 	public ResponseEntity<List<Usuario>> BuscarTodos() {
 		
 		List<Usuario> usuarios = usuarioRepository.findAll();
