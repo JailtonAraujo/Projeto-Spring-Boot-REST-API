@@ -48,7 +48,7 @@ public class JWTTokenAutenticationService {
 		//Atualizando token
 		AplicationContextLoad.getApplicationContext().getBean(UsuarioRepository.class).updateTokenByUsername(JWT, userName);;
 		
-		response.addHeader("Access-Control-Allow-Origin", "*");
+		//response.addHeader("Access-Control-Allow-Origin", "*");
 
 		/* ADICIONANDO TNM NO BODY DO RESPONSE */
 		response.getWriter().write("{\"Authorization\": \"" + token + "\" }");

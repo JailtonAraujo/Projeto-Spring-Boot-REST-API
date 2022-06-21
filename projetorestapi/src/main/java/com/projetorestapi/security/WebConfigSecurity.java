@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -23,18 +24,16 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		//Ativando a proteção contra os usuarios que não estão validados por tokem//
-		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-		/*ATIVANDO ACESSO A PAGINA INICIAL*/
-		.disable().authorizeRequests().antMatchers("/").permitAll()
-		.antMatchers("/index").permitAll()
-		
+		http.authorizeHttpRequests()
+		.antMatchers("/login").permitAll()
 		/*URL DE LOGOUT*/
 		.anyRequest().authenticated().and().logout().logoutSuccessUrl("/index")
 		
 		/*MAPEIA URL DE LOGOUT E INVALIDA O USUARIO*/
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		
+		.and().cors().and().csrf().disable()
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		//Filtra requisições de login para autenticação
 		.and().addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),UsernamePasswordAuthenticationFilter.class)
 		
