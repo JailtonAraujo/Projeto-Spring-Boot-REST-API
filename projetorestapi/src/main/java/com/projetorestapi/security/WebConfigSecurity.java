@@ -25,12 +25,9 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		
 		//Ativando a proteção contra os usuarios que não estão validados por tokem//
 		http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-		
 		/*ATIVANDO ACESSO A PAGINA INICIAL*/
 		.disable().authorizeRequests().antMatchers("/").permitAll()
 		.antMatchers("/index").permitAll()
-		
-		
 		
 		/*URL DE LOGOUT*/
 		.anyRequest().authenticated().and().logout().logoutSuccessUrl("/index")
@@ -52,4 +49,6 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		// Service que irá consultar o usuario no BD//
 		auth.userDetailsService(userDatailsUserService).passwordEncoder(new BCryptPasswordEncoder());
 	}
+	
+	
 }

@@ -11,7 +11,6 @@ public class ProjetorestapiApplication implements WebMvcConfigurer{
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjetorestapiApplication.class, args);
-		System.out.println(new BCryptPasswordEncoder().encode("123"));
 	}
 	
 	@Override

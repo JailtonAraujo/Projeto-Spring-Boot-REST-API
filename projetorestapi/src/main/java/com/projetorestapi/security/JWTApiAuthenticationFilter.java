@@ -21,7 +21,7 @@ public class JWTApiAuthenticationFilter extends GenericFilterBean{
 			throws IOException, ServletException {
 		
 		//Estabelece a autenticação para requisição
-		Authentication authentication = new JWTTokenAutenticationService().getAuthentication((HttpServletRequest) request, (HttpServletResponse) response);		
+		Authentication authentication = new JWTTokenAutenticationService().getAuthentication((HttpServletRequest) request);		
 		
 		//Coloca processo de autenticação no spring security
 		SecurityContextHolder.getContext().setAuthentication(authentication);

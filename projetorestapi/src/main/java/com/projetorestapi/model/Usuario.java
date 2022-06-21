@@ -37,7 +37,6 @@ public class Usuario implements UserDetails{
 	
 	private String login;
 	
-	@JsonIgnore
 	private String senha;
 	
 	private String token = "";
