@@ -1,0 +1,45 @@
+.form-content{
+    width: 50em;
+    padding: 0.6em;
+}
+
+.form-group{
+    padding: 0;
+}
+
+.btns{
+
+}
+
+input[type="submit"],button{
+    
+    border: none;
+   padding: 0.8em 3em 0.8em 3em;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px;
+    
+}
+
+input[type="submit"]{
+    border: solid 1px #32CD32;
+    color: #32CD32;
+    transition: 0.3s;
+}
+
+input[type="submit"]:hover{
+    background-color: #32CD32;
+    color: #fff;
+}
+
+button{
+    margin-left: 0.8em;
+    border: 1px solid #4B0082;
+    color: #4B0082;
+    transition: 0.3s;
+}
+
+button:hover{
+    background-color: #4B0082;
+    color: #fff;
+}

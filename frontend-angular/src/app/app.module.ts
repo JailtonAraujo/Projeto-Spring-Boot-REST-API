@@ -13,6 +13,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormPessoaComponent } from './components/pages/pessoa/form-pessoa/form-pessoa.component';
 import { HomePessoaComponent } from './components/pages/pessoa/home-pessoa/home-pessoa.component';
+import { AboutComponent } from './components/about/about.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { HomePessoaComponent } from './components/pages/pessoa/home-pessoa/home-
     FooterComponent,
     FormPessoaComponent,
     HomePessoaComponent,
+    AboutComponent,
+    WelcomeComponent,
 
   ],
   imports: [

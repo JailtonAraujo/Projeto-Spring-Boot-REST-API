@@ -1,1 +1,42 @@
-<p>form-pessoa works!</p>
+<div class="form-content">
+    <form (submit)="submit();" [formGroup]="formPerson" #formDir="ngForm">
+        
+        <div class="form-group">
+            <label for="id">Id:</label>
+            <input type="text" name="id" id="id" readonly disabled>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Nome:</label>
+            <input type="text" name="name" id="name" formControlName="name">
+
+            <div class="erros-validate" *ngIf="name.invalid && formDir.submitted">
+                <span *ngIf="name.errors?.['required']" >Nome obrigatorio!</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="lastname">Sobrenome:</label>
+            <input type="text" name="lastname" id="lastname" formControlName="lastname">
+
+            <div class="erros-validate" *ngIf="lastname.invalid && formDir.submitted">
+                <span *ngIf="lastname.errors?.['required']" >Sobrenome obrigatorio!</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="birthdate">Data de nascimento:</label>
+            <input type="date" name="birthdate" id="birthdate" formControlName="birthdate">
+
+            <div class="erros-validate" *ngIf="birthdate.invalid && formDir.submitted">
+                <span *ngIf="birthdate.errors?.['required']" >Data de nascimento obrigatorio!</span>
+            </div>
+        </div>
+
+       <div class="btns">
+            <input type="submit" value="Salvar">
+            <button>Limpar</button>
+       </div>
+        
+    </form>
+</div>
