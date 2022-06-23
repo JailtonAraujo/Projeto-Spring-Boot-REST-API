@@ -35,3 +35,11 @@ a:hover{
     margin-left: 0.5em;
     font-weight: bold;
 }
+
+main{
+    height: 85vh;
+}
+
+footer{
+    height: 10vh;
+}

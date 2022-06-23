@@ -3,7 +3,7 @@ import { FormGroup , FormControl, Validators} from '@angular/forms';
 import { Usuario } from 'src/interfaces/Usuario';
 import { LoginService } from 'src/app/services/login.service';
 import { MessageService } from 'src/app/services/message.service';
-import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
   @Input() usuario:Usuario | null = null;
 
   constructor(private loginService:LoginService,
-    private messageService:MessageService) { }
+    private messageService:MessageService,
+    private router:Router) { }
 
   ngOnInit(): void {
     this.userForm = new FormGroup({
@@ -36,13 +37,21 @@ export class LoginComponent implements OnInit {
     if(this.userForm.invalid){
       return;
     }
-    await this.loginService.logar(this.userForm.value).subscribe((data)=>{
-      let token = JSON.parse(JSON.stringify(data)).Authorization;
-      localStorage.setItem("token", token);
-      console.log(token);
-    });
+    await this.loginService.logar(this.userForm.value).subscribe((Response)=>{
 
-    this.messageService.add('Logado com sucesso!');
+      let token = JSON.parse(JSON.stringify(Response)).Authorization;
+      localStorage.setItem("token",token);
+      this.messageService.add("Bem vindo ao sistema!");
+      this.router.navigate(["home"]);
+
+    },
+   error =>{
+      console.log(error);
+      this.messageService.add("Erros de autenticação: Nome de usuario ou senha incorretos");
+    }
+    );
+
+   
   }
 
 }

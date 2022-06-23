@@ -1,0 +1,15 @@
+footer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid #000;
+}
+
+p{
+    font-size: 1.2em;
+}
+
+span{
+    color: rgb(2, 44, 83);
+}

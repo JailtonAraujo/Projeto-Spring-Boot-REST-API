@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.projetorestapi.AplicationContextLoad;
+import com.projetorestapi.DTO.UsuarioDTO;
 import com.projetorestapi.model.Usuario;
 import com.projetorestapi.repository.UsuarioRepository;
 
@@ -20,51 +21,45 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Service
 public class JWTTokenAutenticationService {
 
-	/* TEMPOD DE VALIDADE DO TOKEN (2 DIAS) */
 	private static final long EXPIRATION_TIME = 172800000;
 
-	/* SENHA UNICA PARA COMPOR A AUTENTICAÇÃO E AJUDAR SEGURANÇA */
 	private static final String SECRET = "b2cc3dcf-817f-4c34-a58c-8ef631a3a12e";
 
-	/* PREFIXO PADRAO DE TOKEN */
 	private static final String TOKEN_PREFIX = "Bearer";
 
 	private static final String HEADER_STRING = "Authorization";
 
-	/* GERANDO TOKEN DE AUTENTICAÇÃO E ADICIONANDO AO CABEÇALHO DA RESPOSRA */
 	public void addAuthetication(HttpServletResponse response, String userName) throws IOException {
-		/* MONTAGEM DO TOKEN */
 
 		String JWT = Jwts.builder().setSubject(userName)
 				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
 				.signWith(SignatureAlgorithm.HS512, SECRET).compact();
 
-		/* JUNTANDO TOKEN COM O PREFIXO */
 		String token = TOKEN_PREFIX + " " + JWT;
 
-		/* ADICIONANDO NO CABEÇALHO HTTP */
 		response.addHeader(HEADER_STRING, token);
-		
-		//Atualizando token
-		AplicationContextLoad.getApplicationContext().getBean(UsuarioRepository.class).updateTokenByUsername(JWT, userName);;
-		
-		//response.addHeader("Access-Control-Allow-Origin", "*");
 
-		/* ADICIONANDO TNM NO BODY DO RESPONSE */
-		response.getWriter().write("{\"Authorization\": \"" + token + "\" }");
+		// Atualizando token
+		AplicationContextLoad.getApplicationContext().getBean(UsuarioRepository.class).updateTokenByUsername(JWT,
+				userName);
+		;
+		
+		UsuarioDTO userLogado = new UsuarioDTO(AplicationContextLoad.getApplicationContext().getBean(UsuarioRepository.class).findByLogin(userName));
+		
+		response.addHeader("UserLogado", userLogado.getNome());
+		
+		response.getWriter().write("{\"Authorization\": \"" + token + "\"}");
+		
 	}
 
-	/* RETORNA USUARIO VALIDADO COM TOKEN OU EM CASO DE NÃO RETORNA NULL */
 	public Authentication getAuthentication(HttpServletRequest request) {
 
-		/* PEGA O TOKEN ENVIANDO NO CABEÇALHO */
 		String token = request.getHeader(HEADER_STRING);
 
 		if (token != null) {
 			String tokonClear = token.replace(TOKEN_PREFIX, "").trim();
 
-			String user = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(tokonClear).getBody()
-					.getSubject();
+			String user = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(tokonClear).getBody().getSubject();
 
 			if (user != null) {
 
@@ -72,19 +67,19 @@ public class JWTTokenAutenticationService {
 						.findByLogin(user);
 
 				if (usuario != null) {
-					
-					if(tokonClear.equalsIgnoreCase(usuario.getToken())) {
-						return new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha(), usuario.getAuthorities());
+
+					if (tokonClear.equalsIgnoreCase(usuario.getToken())) {
+						return new UsernamePasswordAuthenticationToken(usuario.getLogin(), usuario.getSenha(),
+								usuario.getAuthorities());
 					}
-					
-					
+
 				}
 
 			}
 
 		}
-		
-		return null; //Não Autoruzado
+
+		return null; // Não Autoruzado
 	}
 
 }

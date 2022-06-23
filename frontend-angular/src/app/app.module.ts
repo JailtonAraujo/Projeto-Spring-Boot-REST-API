@@ -8,6 +8,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { MessageComponent } from './components/message/message.component';
+import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { FormPessoaComponent } from './components/pages/pessoa/form-pessoa/form-pessoa.component';
+import { HomePessoaComponent } from './components/pages/pessoa/home-pessoa/home-pessoa.component';
 
 
 @NgModule({
@@ -15,6 +20,11 @@ import { MessageComponent } from './components/message/message.component';
     AppComponent,
     LoginComponent,
     MessageComponent,
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent,
+    FormPessoaComponent,
+    HomePessoaComponent,
 
   ],
   imports: [

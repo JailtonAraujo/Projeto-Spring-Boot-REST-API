@@ -40,7 +40,7 @@ input[type="submit"]{
     background-color: #fff;
     font-size: 1.4em;
     font-weight: bold;
-    border: none;
+    border: 2px solid #efefef;
     margin-top: 0.6em;
     padding: 0.5em 9.3em 0.5em 9.3em;
     border-radius: 3em;
@@ -48,7 +48,7 @@ input[type="submit"]{
 }
 
 input[type="submit"]:hover{
-    border: 1px solid #000;
+    border-color:#000;
 }
 
 p{

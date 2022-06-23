@@ -26,18 +26,14 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeHttpRequests()
 		.antMatchers("/login").permitAll()
-		/*URL DE LOGOUT*/
 		.anyRequest().authenticated().and().logout().logoutSuccessUrl("/index")
-		
-		/*MAPEIA URL DE LOGOUT E INVALIDA O USUARIO*/
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		
 		.and().cors().and().csrf().disable()
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		//Filtra requisições de login para autenticação
+	
 		.and().addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),UsernamePasswordAuthenticationFilter.class)
 		
-		//filtra demais requisições para verificar a presença do token jwt no header http
 		.addFilterBefore(new JWTApiAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 		
 	}
@@ -45,7 +41,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-		// Service que irá consultar o usuario no BD//
+		
 		auth.userDetailsService(userDatailsUserService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
