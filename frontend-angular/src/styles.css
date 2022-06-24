@@ -5,6 +5,10 @@
     font-family: Cambria;
 }
 
+html,body{
+    width: 100%;
+}
+
 .form-group{
     width: 100%;
     padding: 0em 1em 0em 1em;

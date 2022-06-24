@@ -15,6 +15,7 @@ import { FormPessoaComponent } from './components/pages/pessoa/form-pessoa/form-
 import { HomePessoaComponent } from './components/pages/pessoa/home-pessoa/home-pessoa.component';
 import { AboutComponent } from './components/about/about.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { HttpInterceptorModule } from './services/header-interceptor.service';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
     AppRoutingModule,
     FormsModule, 
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpInterceptorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

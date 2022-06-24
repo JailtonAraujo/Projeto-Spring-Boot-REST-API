@@ -11,7 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.projetorestapi.AplicationContextLoad;
-import com.projetorestapi.DTO.UsuarioDTO;
 import com.projetorestapi.model.Usuario;
 import com.projetorestapi.repository.UsuarioRepository;
 
@@ -44,9 +43,6 @@ public class JWTTokenAutenticationService {
 				userName);
 		;
 		
-		UsuarioDTO userLogado = new UsuarioDTO(AplicationContextLoad.getApplicationContext().getBean(UsuarioRepository.class).findByLogin(userName));
-		
-		response.addHeader("UserLogado", userLogado.getNome());
 		
 		response.getWriter().write("{\"Authorization\": \"" + token + "\"}");
 		

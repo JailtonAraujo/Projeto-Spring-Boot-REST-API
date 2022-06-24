@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Pessoa } from 'src/interfaces/Pessoa';
 
@@ -8,9 +8,9 @@ import { Pessoa } from 'src/interfaces/Pessoa';
   styleUrls: ['./form-pessoa.component.css']
 })
 export class FormPessoaComponent implements OnInit {
-
   formPerson!:FormGroup;
   @Input() person:Pessoa | null = null;
+  @Output() onSubimt = new EventEmitter<Pessoa>();
 
 
   constructor() { }
@@ -30,6 +30,11 @@ export class FormPessoaComponent implements OnInit {
       return;
     }
 
+    this.onSubimt.emit(this.formPerson.value);
+  }
+
+  resetForm(){
+    this.formPerson.reset();
   }
 
   get name(){
@@ -42,6 +47,10 @@ export class FormPessoaComponent implements OnInit {
 
   get birthdate(){
     return this.formPerson.get('birthdate')!;
+  }
+
+  get id(){
+    return this.formPerson.get('id')!;
   }
 
 }

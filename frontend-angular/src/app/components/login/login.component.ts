@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
     await this.loginService.logar(this.userForm.value).subscribe((Response)=>{
 
       let token = JSON.parse(JSON.stringify(Response)).Authorization;
+      console.log(token);
       localStorage.setItem("token",token);
       this.messageService.add("Bem vindo ao sistema!");
       this.router.navigate(["home"]);
