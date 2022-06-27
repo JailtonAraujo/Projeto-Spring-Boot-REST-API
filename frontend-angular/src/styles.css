@@ -41,9 +41,47 @@ a:hover{
 }
 
 main{
-    height: 85vh;    
+        
 }
 
 footer{
     height: 10vh;
+}
+
+.btn-delete,.btn-edit{
+    background-color: transparent;
+    text-align: center;
+    padding: 0.3em;
+    border-radius: 0.2em;
+}
+
+.btn-delete{
+    border: 2px solid #DC143C;
+    color: #DC143C;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    
+}
+
+.btn-delete:hover{
+    color: #fff;
+    background-color: #DC143C;
+}
+
+.btn-edit{
+    border: 2px solid #1880b1;
+    color: #1880b1;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn-edit:hover{
+    color: #fff;
+    background-color: #1880b1;
+}
+
+main{
+    min-height: 85vh;
 }

@@ -13,12 +13,16 @@ export class PessoaService {
 
   constructor(private http:HttpClient) { }
 
-  getPessoas():Observable<Pessoa[]>{
+  getallPessoas():Observable<Pessoa[]>{
     return this.http.get<Pessoa[]>(`${this.UrlRequestMap}/`);
   }
 
   savePessoa(pessoa:Pessoa):Observable<Pessoa>{
       return this.http.post<Pessoa>(`${this.UrlRequestMap}/`,pessoa);
+  }
+
+  delete(id:Number){
+    return this.http.delete(`${this.UrlRequestMap}/${id}`);
   }
 
 }

@@ -16,6 +16,8 @@ import { HomePessoaComponent } from './components/pages/pessoa/home-pessoa/home-
 import { AboutComponent } from './components/about/about.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HttpInterceptorModule } from './services/header-interceptor.service';
+import { ListPessoaComponent } from './components/pages/pessoa/list-pessoa/list-pessoa.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -30,6 +32,7 @@ import { HttpInterceptorModule } from './services/header-interceptor.service';
     HomePessoaComponent,
     AboutComponent,
     WelcomeComponent,
+    ListPessoaComponent,
 
   ],
   imports: [
@@ -38,7 +41,8 @@ import { HttpInterceptorModule } from './services/header-interceptor.service';
     FormsModule, 
     ReactiveFormsModule,
     HttpClientModule,
-    HttpInterceptorModule
+    HttpInterceptorModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

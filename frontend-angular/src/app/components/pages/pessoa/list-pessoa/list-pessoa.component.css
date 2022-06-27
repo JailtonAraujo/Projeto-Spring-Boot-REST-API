@@ -1,0 +1,25 @@
+.content-table{
+    margin-top: 3em;
+    width: 50em;
+}
+
+.search{
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.search button{
+    padding: 0.3em 0.5em 0.3em 0.5em;
+    cursor: pointer;
+}
+.search input{
+    padding: 0.3em 0.3em 0.3em 0.3em;
+}
+
+table{
+    width: 100%;
+}
+
+tbody tr:nth-child(odd){
+    background-color: #D3D3D3;
+}

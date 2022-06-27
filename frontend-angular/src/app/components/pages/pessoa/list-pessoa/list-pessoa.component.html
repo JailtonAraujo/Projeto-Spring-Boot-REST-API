@@ -1,0 +1,26 @@
+<div class="content-table">
+    <form class="search">
+        <input type="text" id="nameSearch" id="nameSearch" placeholder="Buscar pelo nome">
+        <button><fa-icon [icon]="faSearch" class="icon"></fa-icon></button>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id:</th>
+                <th scope="col">Nome:</th>
+                <th scope="col">Data de Nascimento:</th>
+                <th scope="col">Ações:</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let pessoa of allpessoas">
+                <td>{{pessoa.id}}</td>
+                <td>{{pessoa.name}}</td>
+                <td>{{pessoa.birthdate}}</td>
+                <td><button class="btn-delete" (click)="remove(pessoa.id!);" >Excluir <fa-icon  [icon]="faTimes"></fa-icon> </button></td>
+                <td><button class="btn-edit"  >Editar <fa-icon [icon]="faPencil"></fa-icon> </button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
