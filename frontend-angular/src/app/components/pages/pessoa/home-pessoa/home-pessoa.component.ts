@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Pessoa } from 'src/interfaces/Pessoa';
 import { PessoaService } from 'src/app/services/pessoa.service';
 import { MessageService } from 'src/app/services/message.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home-pessoa',
@@ -11,13 +11,20 @@ import { Router } from '@angular/router';
 })
 export class HomePessoaComponent implements OnInit {
 
-  Allpessoas:Pessoa[] = [];
+  pessoa!:Pessoa;
 
   constructor(private pessoaService:PessoaService,
-  private messageService:MessageService, private router:Router) { }
+  private messageService:MessageService, private router:Router,
+  private activateRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getAll();
+    const id = Number(this.activateRoute.snapshot.paramMap.get('id'));
+    if(id > 0){
+      this.pessoaService.get(id).subscribe((item)=>{
+        this.pessoa.id = item.id;
+
+      });
+    }
   }
 
   async createHandler(pessoa:Pessoa){
@@ -25,13 +32,6 @@ export class HomePessoaComponent implements OnInit {
     await this.pessoaService.savePessoa(pessoa).subscribe();
     this.messageService.add("Salvo com sucesso!");
   }
-
   
-
-  getAll(){
-    this.pessoaService.getallPessoas().subscribe((itens)=>{
-      this.Allpessoas = itens;
-    });
-  }  
 
 }

@@ -14,10 +14,12 @@ export class HomeComponent implements OnInit {
   
   ngOnInit(): void {
  
+    /*
     if(localStorage.getItem('token') == null || localStorage.getItem('token')?.trim() == ''){
       this.router.navigate(['']);
       this.messageService.add('Erro na autenticação ou token expirado. por favor, autentique-se!');
     }
+    */
    
   }
 

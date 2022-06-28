@@ -25,4 +25,12 @@ export class PessoaService {
     return this.http.delete(`${this.UrlRequestMap}/${id}`);
   }
 
+  edit(pessoa:Pessoa):Observable<Pessoa>{
+    return this.http.put<Pessoa>(`${this.UrlRequestMap}/`, pessoa);
+  }
+
+  get(id:Number):Observable<Pessoa>{
+    return this.http.get<Pessoa>(`${this.UrlRequestMap}/${id}`);
+  }
+
 }

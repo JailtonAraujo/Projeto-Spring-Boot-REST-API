@@ -8,7 +8,7 @@
 
         <div class="form-group">
             <label for="name">Nome:</label>
-            <input type="text" name="name" id="name" formControlName="name">
+            <input type="text"  formControlName="name">
 
             <div class="erros-validate" *ngIf="name.invalid && formDir.submitted">
                 <span *ngIf="name.errors?.['required']" >Nome obrigatorio!</span>

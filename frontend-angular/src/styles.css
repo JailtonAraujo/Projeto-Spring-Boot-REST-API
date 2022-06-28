@@ -70,6 +70,7 @@ footer{
 }
 
 .btn-edit{
+    display: inline-block;
     border: 2px solid #1880b1;
     color: #1880b1;
     font-weight: bold;

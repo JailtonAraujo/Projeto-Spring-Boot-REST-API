@@ -12,10 +12,12 @@ export class WelcomeComponent implements OnInit {
   constructor(private router:Router, private messageService:MessageService) { }
 
   ngOnInit(): void {
+    /*
     if(localStorage.getItem('token') == null || localStorage.getItem('token')?.trim() == ''){
       this.router.navigate(['']);
       this.messageService.add('Erro na autenticação ou token expirado. por favor, autentique-se!');
     }
+    */
   }
 
 }

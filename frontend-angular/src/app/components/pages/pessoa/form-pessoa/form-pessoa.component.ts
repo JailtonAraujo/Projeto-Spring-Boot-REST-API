@@ -8,20 +8,21 @@ import { Pessoa } from 'src/interfaces/Pessoa';
   styleUrls: ['./form-pessoa.component.css']
 })
 export class FormPessoaComponent implements OnInit {
-  formPerson!:FormGroup;
-  @Input() person:Pessoa | null = null;
   @Output() onSubimt = new EventEmitter<Pessoa>();
-
+  @Input() person:Pessoa | null = null;
+  
+  formPerson!:FormGroup;
 
   constructor() { }
 
   ngOnInit(): void {
+  
     this.formPerson = new FormGroup({
       id: new FormControl(this.person ? this.person.id : ""),
       name:new FormControl(this.person ? this.person.name : "",[Validators.required]),
       lastname: new FormControl(this.person ? this.person.lastname : "", [Validators.required]),
       birthdate: new FormControl(this.person ? this.person.birthdate : "", [Validators.required])
-    })
+    });
   }
 
   submit(){
