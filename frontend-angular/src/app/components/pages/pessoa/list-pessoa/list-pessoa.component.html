@@ -1,4 +1,5 @@
 <div class="content-table">
+    <h2>Pessoas</h2>
     <form class="search">
         <input type="text" id="nameSearch" id="nameSearch" placeholder="Buscar pelo nome">
         <button><fa-icon [icon]="faSearch" class="icon"></fa-icon></button>
@@ -18,9 +19,10 @@
                 <td>{{pessoa.id}}</td>
                 <td>{{pessoa.name}}</td>
                 <td>{{pessoa.birthdate}}</td>
-                <td><button class="btn-delete" (click)="remove(pessoa.id!);" >Excluir <fa-icon  [icon]="faTimes"></fa-icon> </button></td>
+                <td><button class="btn-delete" (click)="remover(pessoa.id!);" >Excluir <fa-icon  [icon]="faTimes"></fa-icon> </button></td>
                 <td><button class="btn-edit"  >Editar <fa-icon [icon]="faPencil"></fa-icon> </button></td>
             </tr>
         </tbody>
+        <a routerLink="/home/new">Novo <fa-icon [icon]="faPlus"></fa-icon></a>
     </table>
 </div>

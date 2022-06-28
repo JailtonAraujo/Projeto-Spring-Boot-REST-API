@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faSearch, faTimes, faPencil } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from '@angular/core';
+import { faSearch, faTimes, faPencil, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Pessoa } from 'src/interfaces/Pessoa';
 import { PessoaService } from 'src/app/services/pessoa.service';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-list-pessoa',
@@ -10,25 +11,38 @@ import { PessoaService } from 'src/app/services/pessoa.service';
 })
 export class ListPessoaComponent implements OnInit {
 
-  faSearch=faSearch;
-  faTimes=faTimes;
-  faPencil=faPencil;
+  faSearch = faSearch;
+  faTimes = faTimes;
+  faPencil = faPencil;
+  faPlus = faPlus;
   
-  @Output() deletar = new EventEmitter<Number>();
-
-  @Input() allpessoas:Pessoa[] = [];
-  constructor(private pessoaService:PessoaService) { }
+  allpessoas: Pessoa[] = [];
+  constructor(private pessoaService: PessoaService,
+    private messageService: MessageService) { }
 
   ngOnInit(): void {
-    
+    this.Listpessoas();
   }
 
-  Listpessoas(){
-
+  Listpessoas() {
+    this.pessoaService.getallPessoas().subscribe((itens) => {
+      console.log(itens);
+      this.allpessoas = itens;
+    });
   }
 
-  remove(id:Number){
-    this.deletar.emit(id);
+  async remover(id: Number) {
+    if (!confirm('Tem certeza que deseja deletar o item?')) {
+      return;
+    }
+
+    await this.pessoaService.delete(id).subscribe();
+
+    this.allpessoas = this.allpessoas.filter(item => item.id != id);
+
+    this.messageService.add('Excluido com sucesso!');
+
+
   }
 
 }

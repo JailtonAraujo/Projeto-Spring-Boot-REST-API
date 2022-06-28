@@ -5,6 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormPessoaComponent } from './components/pages/pessoa/form-pessoa/form-pessoa.component';
 import { HomePessoaComponent } from './components/pages/pessoa/home-pessoa/home-pessoa.component';
+import { ListPessoaComponent } from './components/pages/pessoa/list-pessoa/list-pessoa.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   {
     path: 'home', component: HomeComponent,
     children: [
-      { path: 'pessoa', component: HomePessoaComponent},
+      { path: 'pessoa', component: ListPessoaComponent},
+      {path: 'new', component:HomePessoaComponent}
     ]
   },
 ];

@@ -26,19 +26,7 @@ export class HomePessoaComponent implements OnInit {
     this.messageService.add("Salvo com sucesso!");
   }
 
-  async deletar(id:Number){
-    if(!confirm('Tem certeza que deseja deletar o item?')){
-      return;
-    }
-    
-    await this.pessoaService.delete(id).subscribe();
-
-    this.Allpessoas = this.Allpessoas.filter(item => item.id != id);
-
-    this.messageService.add('Excluido com sucesso!');
-
-    
-  }
+  
 
   getAll(){
     this.pessoaService.getallPessoas().subscribe((itens)=>{

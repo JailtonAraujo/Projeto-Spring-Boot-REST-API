@@ -50,4 +50,10 @@ public class PessoaController {
 		
 		return new ResponseEntity<Pessoa>(HttpStatus.OK);
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Pessoa> get (@PathVariable(name = "id") Integer id){
+		
+		return new ResponseEntity<Pessoa>(pessoaRepository.findById(id).get(), HttpStatus.OK);
+	}
 }
