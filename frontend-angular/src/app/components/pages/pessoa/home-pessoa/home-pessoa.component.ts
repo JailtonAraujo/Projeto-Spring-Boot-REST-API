@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class HomePessoaComponent implements OnInit {
 
-  pessoa!:Pessoa;
+
 
   constructor(private pessoaService:PessoaService,
   private messageService:MessageService, private router:Router,
