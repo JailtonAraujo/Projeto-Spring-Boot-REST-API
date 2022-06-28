@@ -10,6 +10,7 @@ import { Pessoa } from 'src/interfaces/Pessoa';
 export class FormPessoaComponent implements OnInit {
   @Output() onSubimt = new EventEmitter<Pessoa>();
   @Input() person:Pessoa | null = null;
+  @Input () btnText = '';
   
   formPerson!:FormGroup;
 

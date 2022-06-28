@@ -8,7 +8,7 @@
 
         <div class="form-group">
             <label for="name">Nome:</label>
-            <input type="text"  formControlName="name">
+            <input type="text" name="name" id="name" formControlName="name">
 
             <div class="erros-validate" *ngIf="name.invalid && formDir.submitted">
                 <span *ngIf="name.errors?.['required']" >Nome obrigatorio!</span>
@@ -34,8 +34,9 @@
         </div>
 
        <div class="btns">
-            <input type="submit" value="Salvar">
+            <input type="submit" value="{{btnText}}">
             <button type="button" (click)="resetForm();">Limpar</button>
+            <a routerLink="/home/pessoa" >Cancelar</a>
        </div>
         
     </form>

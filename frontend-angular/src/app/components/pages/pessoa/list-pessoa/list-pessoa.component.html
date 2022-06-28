@@ -20,7 +20,7 @@
                 <td>{{pessoa.name}}</td>
                 <td>{{pessoa.birthdate}}</td>
                 <td><button class="btn-delete" (click)="remover(pessoa.id!);" >Excluir <fa-icon  [icon]="faTimes"></fa-icon> </button></td>
-                <td><a routerLink="/home/pessoa/{{pessoa.id}}" class="btn-edit"  >Editar <fa-icon [icon]="faPencil"></fa-icon> </a></td>
+                <td><a routerLink="/home/edit/{{pessoa.id}}" class="btn-edit"  >Editar <fa-icon [icon]="faPencil"></fa-icon> </a></td>
             </tr>
         </tbody>
         <a class="novo" routerLink="/home/new">Novo <fa-icon [icon]="faPlus"></fa-icon></a>

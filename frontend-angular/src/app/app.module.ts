@@ -12,12 +12,13 @@ import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { FormPessoaComponent } from './components/pages/pessoa/form-pessoa/form-pessoa.component';
-import { HomePessoaComponent } from './components/pages/pessoa/home-pessoa/home-pessoa.component';
 import { AboutComponent } from './components/about/about.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
 import { HttpInterceptorModule } from './services/header-interceptor.service';
 import { ListPessoaComponent } from './components/pages/pessoa/list-pessoa/list-pessoa.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NewPessoaComponent } from './components/pages/pessoa/new-pessoa/new-pessoa.component';
+import { EditPessoaComponent } from './components/pages/pessoa/edit-pessoa/edit-pessoa.component';
 
 
 @NgModule({
@@ -29,10 +30,11 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     HeaderComponent,
     FooterComponent,
     FormPessoaComponent,
-    HomePessoaComponent,
     AboutComponent,
     WelcomeComponent,
     ListPessoaComponent,
+    NewPessoaComponent,
+    EditPessoaComponent,
 
   ],
   imports: [

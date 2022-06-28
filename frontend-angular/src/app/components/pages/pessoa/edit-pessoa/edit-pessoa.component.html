@@ -1,0 +1,6 @@
+<div class="pessoa" *ngIf="person">
+    <h2>{{person.name}} em edição!</h2>
+    <app-form-pessoa [btnText]="btnText" [person]="person" (onSubimt)="edit($event);"></app-form-pessoa>    
+</div>
+
+
