@@ -19,6 +19,7 @@ import { ListPessoaComponent } from './components/pages/pessoa/list-pessoa/list-
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NewPessoaComponent } from './components/pages/pessoa/new-pessoa/new-pessoa.component';
 import { EditPessoaComponent } from './components/pages/pessoa/edit-pessoa/edit-pessoa.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { EditPessoaComponent } from './components/pages/pessoa/edit-pessoa/edit-
     ReactiveFormsModule,
     HttpClientModule,
     HttpInterceptorModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

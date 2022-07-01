@@ -3,6 +3,7 @@ package com.projetorestapi.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -37,11 +38,19 @@ public class PessoaController {
 	}
 	
 	@GetMapping(value="/",produces = "application/json")
-	public ResponseEntity<List<Pessoa>> getAll (){
+	public ResponseEntity<Page<Pessoa>> getAll (){
 		
-		List<Pessoa> pessoas = pessoaRepository.findAll(PageRequest.of(0, 5)).getContent();
+		Page<Pessoa> pessoas = pessoaRepository.findAll(PageRequest.of(0, 5));
 		
-		return new ResponseEntity<List<Pessoa>>(pessoas, HttpStatus.OK);
+		return new ResponseEntity<Page<Pessoa>>(pessoas, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/page/{page}",produces = "application/json")
+	public ResponseEntity<Page<Pessoa>> getAllPagination (@PathVariable("page") int page){
+		
+		Page<Pessoa> pessoas = pessoaRepository.findAll(PageRequest.of(page, 5));
+		
+		return new ResponseEntity<Page<Pessoa>>(pessoas, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -65,4 +74,20 @@ public class PessoaController {
 		
 		return new ResponseEntity<Pessoa>(HttpStatus.OK);	
 		}
+	
+	@GetMapping("/name/{name}")
+	public ResponseEntity<Page<Pessoa>> findByName(@PathVariable(name = "name") String name){
+		
+		Page<Pessoa> list= null;
+		PageRequest pageRequest = null;
+		
+		if(name == null || name.trim().isEmpty() || name.equalsIgnoreCase("undefined")) {
+			pageRequest = PageRequest.of(0, 5);
+			list = pessoaRepository.findAll(pageRequest);
+		}else {
+			list = pessoaRepository.findByNamePaginatio(name, pageRequest);
+		}
+		
+		return new ResponseEntity<Page<Pessoa>>(list, HttpStatus.OK);
+	}
 }

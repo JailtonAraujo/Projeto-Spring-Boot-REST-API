@@ -8,13 +8,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PessoaService {
-  baseApiUrl = environment.baseApiUrl;
+  baseApiUrl= environment.baseApiUrl;
   UrlRequestMap = `${this.baseApiUrl}pessoa`;
 
   constructor(private http:HttpClient) { }
 
-  getallPessoas():Observable<Pessoa[]>{
-    return this.http.get<Pessoa[]>(`${this.UrlRequestMap}/`);
+  getallPessoas():Observable<any>{
+    return this.http.get<any[]>(`${this.UrlRequestMap}/`);
+  }
+
+  getallPessoasPagination(page:Number):Observable<any>{
+    return this.http.get<any[]>(`${this.UrlRequestMap}/page/${page}`);
   }
 
   savePessoa(pessoa:Pessoa):Observable<Pessoa>{
@@ -31,6 +35,10 @@ export class PessoaService {
 
   get(id:Number):Observable<Pessoa>{
     return this.http.get<Pessoa>(`${this.UrlRequestMap}/${id}`);
+  }
+
+  searchByName(name:String):Observable<Pessoa[]>{
+    return this.http.get<Pessoa[]>(`${this.UrlRequestMap}/name/${name}`);
   }
 
 }

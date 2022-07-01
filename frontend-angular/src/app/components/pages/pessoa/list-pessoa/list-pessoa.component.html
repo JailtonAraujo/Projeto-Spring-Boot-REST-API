@@ -1,8 +1,9 @@
 <div class="content-table">
     <h2>Pessoas</h2>
-    <form class="search">
-        <input type="text" id="nameSearch" id="nameSearch" placeholder="Buscar pelo nome">
-        <button><fa-icon [icon]="faSearch" class="icon"></fa-icon></button>
+    <form class="search" [formGroup]="formSearch" #formDir="ngForm" (submit)="search();" >
+        <input type="text" id="nameSearch" id="nameSearch" value="{{nameSearch}}" placeholder="Buscar pelo nome" formControlName="nameSea">
+
+        <button  type="submit"><fa-icon [icon]="faSearch" class="icon"></fa-icon></button>
     </form>
     <table class="table">
         <thead>
@@ -15,7 +16,7 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let pessoa of allpessoas">
+            <tr *ngFor="let pessoa of allpessoas | paginate:{ itemsPerPage:5, currentPage: p, totalItems:total}">
                 <td>{{pessoa.id}}</td>
                 <td>{{pessoa.name}}</td>
                 <td>{{pessoa.birthdate}}</td>
@@ -25,4 +26,7 @@
         </tbody>
         <a class="novo" routerLink="/home/new">Novo <fa-icon [icon]="faPlus"></fa-icon></a>
     </table>
+    <div class="text-center">
+        <pagination-controls (pageChange)="carregarPagina(p = $event);" ></pagination-controls>
+    </div>
 </div>

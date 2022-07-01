@@ -18,8 +18,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.projetorestapi.service.ErrorsObjects;
 
-@RestControllerAdvice
-@ControllerAdvice
+
 public class ExceptionsController extends ResponseEntityExceptionHandler{
 
 	@ExceptionHandler({Exception.class, RuntimeException.class, Throwable.class})
